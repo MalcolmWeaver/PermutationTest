@@ -6,10 +6,12 @@ find_max:           # I am not sure if the type name, global name, and first sym
     xor     %rax, %rax
     mov     $1, %rcx
 check_next:
-    cmp     %rax, (%rdi, %rdx, 1)
+    mov     (%rdi, %rax, 8), %r8
+    mov     (%rdi, %rcx, 8), %r9
+    cmp     %r8, %r9
     cmovg   %rcx, %rax
     inc     %rcx
-    cmp     %rcx, %rsi
+    cmp     %rsi, %rcx
     jl      check_next
 exit:
     mov     %rbp, %rsp
